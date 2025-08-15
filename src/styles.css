@@ -1,1 +1,280 @@
-...
+/* Base */
+:root {
+  --bg: #0b0b0b;
+  --panel: #141414;
+  --panel-2: #1b1b1b;
+  --text: #eaeaea;
+  --muted: #a9a9a9;
+  --red: #ff3040;         /* primary accent red */
+  --red-700: #c51f2b;
+  --red-900: #8f1720;
+  --outline: #2a2a2a;
+  --shadow: rgba(0,0,0,0.45);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(1200px 800px at 50% -10%, #141414, #0a0a0a) fixed,
+              linear-gradient(180deg, #0b0b0b 0%, #0b0b0b 100%);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  letter-spacing: 0.2px;
+}
+
+/* Center everything */
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px 16px;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center; /* center all content */
+}
+
+/* Header */
+.header {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  margin-bottom: 15px;
+}
+.subtitle {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+.grid-2 {
+  grid-template-columns: 1fr;
+}
+/* .grid-3 {
+  grid-template-columns: 1fr;
+} */
+
+
+/* Replace your existing .grid-3 rules with this */
+.grid-3 {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+}
+
+/* (optional) On very small screens allow two wide cards instead of three cramped ones */
+@media (max-width: 880px) {
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+}
+
+
+/* Responsive columns */
+@media (min-width: 880px) {
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+}
+/* @media (min-width: 680px) {
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+} */
+
+/* Cards */
+.card {
+  background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+  border: 1px solid var(--outline);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 6px 20px var(--shadow);
+  text-align: left; /* inner elements control text; parent container is centered */
+}
+
+/* Haiku cards */
+.card.haiku {
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #232323;
+}
+.card.haiku:hover {
+  transform: translateY(-2px);
+  border-color: #313131;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+.card.haiku.selected {
+  border-color: var(--red);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--red) 35%, #000 65%), 0 12px 34px var(--shadow);
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  min-height: 120px;
+  border-radius: 12px;
+  background: #0f0f0f;
+  border: 1px solid var(--outline);
+  padding: 12px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.textArea {
+  width: 100%;
+  border-radius: 12px;
+  background: #0f0f0f;
+  border: 1px solid var(--outline);
+  color: var(--text);
+  padding: 12px;
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+}
+
+.input:focus,
+.textArea:focus {
+  outline: none;
+  border-color: color-mix(in oklab, var(--red) 50%, #fff 0%);
+  box-shadow: 0 0 0 3px rgba(255,48,64,0.2);
+}
+
+/* Buttons */
+.btn {
+  appearance: none;
+  border: 1px solid #2a2a2a;
+  background: #161616;
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  font-weight: 600;
+}
+.btn:hover { transform: translateY(-1px); border-color: #3a3a3a; }
+.btn:active { transform: translateY(0); }
+
+.btn.primary {
+  background: linear-gradient(180deg, var(--red) 0%, var(--red-700) 100%);
+  border-color: var(--red-900);
+  color: white;
+  box-shadow: 0 6px 16px rgba(255,48,64,0.24);
+}
+.btn.primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn.red {
+  background: linear-gradient(180deg, var(--red) 0%, var(--red-700) 100%);
+  border-color: var(--red-900);
+  color: #fff;
+}
+.btn.red:hover { filter: brightness(1.06); }
+
+.btn.secondary {
+  background: transparent;
+  border-color: #2a2a2a;
+}
+.btn.secondary:hover { border-color: #3a3a3a; }
+
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Utilities */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.footer {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center footer content */
+  gap: 10px;
+}
+.footer.actions {
+  margin-top: 16px;
+  justify-content: space-between;
+}
+@media (max-width: 680px) {
+  .footer.actions { flex-direction: column; gap: 12px; }
+}
+
+.small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.dim { color: #9a9a9a; }
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  background: color-mix(in oklab, var(--red) 20%, #1a1a1a 80%);
+  border: 1px solid var(--red-900);
+  color: #ffd7db;
+  text-transform: uppercase;
+}
+
+/* Timer + errors with red accent */
+.timer { color: #ff8892; }
+.error { color: #ff8892; }
+
+
+/* Haiku text: preserve lines, avoid wrapping, scale down to fit */
+.haikuText {
+  /* keep the \n line breaks, but do not wrap within a line */
+  white-space: pre;          /* << key: each 5/7/5 line stays on one line */
+  word-break: keep-all;
+  overflow-wrap: normal;
+
+  /* center & style */
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', serif;
+
+  /* responsive sizing: smaller on narrow cards so lines fit */
+  font-size: clamp(14px, 1.1vw + 10px, 18px);
+  line-height: 1.7;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+
+/* Make the right column content centered too */
+.card .row,
+.card .small,
+.card .input,
+.card .textArea,
+.card .footer {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Gently highlight focusable haiku cards */
+.card.haiku:focus {
+  outline: 2px solid color-mix(in oklab, var(--red) 45%, #fff 0%);
+  outline-offset: 2px;
+}
